@@ -187,11 +187,12 @@ h6 {
 
 #dropzone {
     background: #cccccc;
-    width:  100%;
+    width: 100%;
     height: 100%;
     line-height: 50px;
     text-align: center;
     font-weight: bold;
+    border: cornflowerblue dashed;
 }
 
 #dropzone.in {
