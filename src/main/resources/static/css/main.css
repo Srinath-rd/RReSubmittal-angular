@@ -1,0 +1,15 @@
+h3 {
+    background-color: gray;
+}
+
+.important {
+    color: red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.txtleft {
+    text-align: left;
+}
