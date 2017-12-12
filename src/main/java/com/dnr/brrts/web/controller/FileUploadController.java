@@ -1,6 +1,8 @@
 package com.dnr.brrts.web.controller;
 
 import com.dnr.brrts.web.model.FileMeta;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +17,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class FileUploadController {
-    private  LinkedList<FileMeta> files = new LinkedList<FileMeta>();
+    private List<FileMeta> files = new LinkedList<FileMeta>();
     private FileMeta fileMeta = null;
-    @RequestMapping(value="/upload", method = RequestMethod.POST)
-    public @ResponseBody LinkedList<FileMeta> upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+    @RequestMapping(value="nformfiles/upload", method = RequestMethod.POST)
+    public @ResponseBody List<FileMeta> upload(MultipartHttpServletRequest request, HttpServletResponse response) {
 
         //1. build an iterator
         Iterator<String> itr =  request.getFileNames();
@@ -34,9 +39,6 @@ public class FileUploadController {
             mpf = request.getFile(itr.next());
             System.out.println(mpf.getOriginalFilename() +" uploaded! "+files.size());
 
-            //2.2 if files > 10 remove the first from the list
-            if(files.size() >= 10)
-                files.pop();
 
             //2.3 create new fileMeta
             fileMeta = new FileMeta();
@@ -69,7 +71,7 @@ public class FileUploadController {
      * @param value : value from the URL
      * @return void
      ****************************************************/
-    @RequestMapping(value = "/get/{value}", method = RequestMethod.GET)
+    @RequestMapping(value = "nformfiles/get/{value}", method = RequestMethod.GET)
     public void get(HttpServletResponse response,@PathVariable String value){
         FileMeta getFile = files.get(Integer.parseInt(value));
         try {
@@ -80,5 +82,22 @@ public class FileUploadController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+
+
+    /***************************************************
+     * URL: /rest/controller/get/{value}
+     * get(): get file as an attachment
+     * @param response : passed by the server
+     * @param value : value from the URL
+     * @return void
+     ****************************************************/
+    @RequestMapping(value = "nformfiles/delete/{value}", method = RequestMethod.GET)
+    public void delete(String fileName , HttpServletResponse response,@PathVariable String value){
+        logger.debug("Inside delete method");
+        logger.debug("Filename" + fileName);
+        files = files.stream().filter(file -> file.getFileName().equalsIgnoreCase(fileName)).collect(Collectors.toList());
+
     }
 }

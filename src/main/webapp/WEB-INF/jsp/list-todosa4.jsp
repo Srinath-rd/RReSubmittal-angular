@@ -63,20 +63,24 @@
 
         <div>
 
-            <input id="fileupload" type="file" name="files[]" data-url="upload" multiple>
-
+            <%--<input id="fileupload" type="file" name="files[]" data-url="nformfiles/upload" multiple>--%>
+            <span class="btn btn-info fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>Add files...</span>
+                    <input id="fileupload" type="file" name="files[]"  multiple data-url="nformfiles/upload" >
+            </span>
             <div id="dropzone" class="fade well">Drop files here</div>
 
             <div id="progress" class="progress">
                 <div class="progress-bar bar" role="progressbar" style="width: 0%;"></div>
             </div>
 
-            <table id="uploaded-files" class="table">
+            <table id="uploaded-files" class="table table-striped">
                 <tr>
                     <th>File Name</th>
                     <th>File Size</th>
                     <th>File Type</th>
-                    <th>Download</th>
+                    <th>Delete</th>
                 </tr>
             </table>
 

@@ -3,7 +3,8 @@
     <div class="navbar-collapse">
         <ul class="nav navbar-nav">
             <li><a href="/RReSubmittal/">Home</a></li>
-            <li><a href="/RReSubmittal/list-todos-alt3">Notification Form</a></li>
+            <%--<li><a href="/RReSubmittal/list-todos-alt3">ND</a></li>--%>
+            <%--<li><a href="/RReSubmittal/list-todos-alt4">Facility Test</a></li>--%>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
