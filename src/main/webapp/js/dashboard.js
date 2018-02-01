@@ -1,6 +1,6 @@
 (function () {
 
-    var userId = $("#userId").text();
+    var username = $("#username").text();
     $('#forms-directory').click();
     var contextPath = $("#home-context").text();
     $("#homepage-errormsg").hide();
@@ -61,7 +61,7 @@
 
     $("#forms-completed").click(function () {
         $("#applicationlist").empty();
-        $.getJSON("users/" + userId + "/applications/completed", function (data) {
+        $.getJSON("users/" + username + "/applications/completed", function (data) {
             var thtml = '';
             $.each(data, function (index, text) {
                 var formName = '';
@@ -110,7 +110,7 @@
 
     $("#forms-submitted").click(function () {
         $("#applicationlist").empty();
-        $.getJSON("users/" + userId + "/applications/submitted", function (data) {
+        $.getJSON("users/" + username + "/applications/submitted", function (data) {
             var thtml = '';
             $.each(data, function (index, text) {
                 var formName = '';
@@ -159,7 +159,7 @@
 
     $("#forms-in-progress").click(function () {
         $("#applicationlist").empty();
-        $.getJSON("users/" + userId + "/applications/pending", function (data) {
+        $.getJSON("users/" + username + "/applications/pending", function (data) {
             var thtml = '';
             $.each(data, function (index, text) {
                 var formName = '';
@@ -225,7 +225,7 @@
             },
             success: function () {
                 $("#applicationlist").empty();
-                $.getJSON("users/" + userId + "/applications/pending", function (data) {
+                $.getJSON("users/" + username + "/applications/pending", function (data) {
                     var thtml = '';
                     $.each(data, function (index, text) {
                         var formName = '';

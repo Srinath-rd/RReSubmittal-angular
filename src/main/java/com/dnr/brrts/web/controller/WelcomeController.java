@@ -37,12 +37,13 @@ public class WelcomeController {
         logger.info("*************Inside showWelcomePage method***************");
         String username = userLoginUtility.getLoggedinUserName();
         logger.debug("User name is" + " " +  username);
-        NfUser user = userService.findUserByEmail(username);
-        model.put("allReports", reportService.findReportsByUserName(user.getEmail()));
-        model.put("pendingReports", reportService.findReportsByUserNameAndStatus(user.getEmail(), FormStatus.PENDING));
-        model.put("completedReports", reportService.findReportsByUserNameAndStatus(user.getEmail(), FormStatus.COMPLETED));
+        NfUser user = userService.findUserByUsername(username);
+        model.put("allReports", reportService.findReportsByUserName(user.getUsername()));
+        model.put("pendingReports", reportService.findReportsByUserNameAndStatus(user.getUsername(), FormStatus.PENDING));
+        model.put("completedReports", reportService.findReportsByUserNameAndStatus(user.getUsername(), FormStatus.COMPLETED));
         model.addAttribute("name", user.getFirstName());
-        model.addAttribute("useremail" , username);
+        model.addAttribute("username" , username);
+        model.addAttribute("useremail" , user.getEmail());
         return "home";
     }
 

@@ -20,7 +20,7 @@
                 <h3 class="form-signin-heading">Welcome</h3>
                 <br/>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <input type="text" id="email" name="email" placeholder="email"
+                <input type="text" id="username" name="username" placeholder="username"
                        class="form-control"/> <br/>
                 <input type="password" placeholder="Password"
                        id="password" name="password" class="form-control"/> <br/>

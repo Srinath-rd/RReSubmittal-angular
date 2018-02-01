@@ -30,21 +30,21 @@ public class UserController {
     private ApplicationFormService formService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
-    @GetMapping("/users/{userId}/applications/pending")
-   List<NfReport> getPendingApplicationByUser(@PathVariable String userId){
+    @GetMapping("/users/{username}/applications/pending")
+   List<NfReport> getPendingApplicationByUser(@PathVariable String username){
 
-        return  reportService.findReportsByUserNameAndStatus(userId, FormStatus.PENDING);
+        return  reportService.findReportsByUserNameAndStatus(username, FormStatus.PENDING);
 
    }
 
-   @GetMapping("/users/{userId}/applications/completed")
-   List<NfReport> getCompletedAppsByUser(@PathVariable String userId){
-       return reportService.findReportsByUserNameAndStatus(userId, FormStatus.COMPLETED);
+   @GetMapping("/users/{username}/applications/completed")
+   List<NfReport> getCompletedAppsByUser(@PathVariable String username){
+       return reportService.findReportsByUserNameAndStatus(username, FormStatus.COMPLETED);
    }
 
-    @GetMapping("/users/{userId}/applications/submitted")
-    List<NfReport> getSubmittedAppsByUser(@PathVariable String userId){
-        return reportService.findReportsByUserNameAndStatus(userId, FormStatus.SUBMITTED);
+    @GetMapping("/users/{username}/applications/submitted")
+    List<NfReport> getSubmittedAppsByUser(@PathVariable String username){
+        return reportService.findReportsByUserNameAndStatus(username, FormStatus.SUBMITTED);
     }
 
    @GetMapping("/users/applications/all")

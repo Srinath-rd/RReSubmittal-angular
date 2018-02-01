@@ -13,7 +13,7 @@
 
     $("#cancel").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:7001/rresubmittal/api/";
+        window.location.href = "http://localhost:7001/rresubmittal/";
     })
     var buttonId = ""
     var buttonClick = function () {

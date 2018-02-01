@@ -5,7 +5,7 @@
         <div>
             <h4>Welcome, ${name}</h4></div>
             <span style="display: none" id="userFirstname">${name}</span>
-        <span style="display: none" id="userId">${useremail}</span>
+        <span style="display: none" id="username">${username}</span>
         <div id="homepage-errormsg" style="display: none" class="error error-message"></div>
         <div id="homepage-successmsg" style="display: none" class="alert-success"></div>
         <c:set var="homeContext" value="${pageContext.request.contextPath}"/>

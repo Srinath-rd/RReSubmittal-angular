@@ -6,7 +6,7 @@
     var userEmail = $("#userEmail").text();
 
     if (reportId != null && reportId != undefined && reportId != '') {
-        // $.getJSON("users/" + userId + "/applications/pending", function (data) {
+        // $.getJSON("users/" + username + "/applications/pending", function (data) {
         //
         // })
 
@@ -233,7 +233,7 @@
                                 .append($('<td/>').text('1 kb'))
                                 .append($('<td/>').text(file.attachmentFileType))
                                 .append($('<td style="display: none" id="attchId' + index + '"/>').text(file.attachmentId))
-                                .append($('<td/>').html(" <a type='button'  href='/rresubmittal/api/eforms/" + reportId + "/downloadFile/" + file.attachmentId +"','class='btn btn-xs btn-info downloadNFormFile' id='nformFileIndex" + index +
+                                .append($('<td/>').html(" <a type='button'  href='/rresubmittal/eforms/" + reportId + "/downloadFile/" + file.attachmentId +"','class='btn btn-xs btn-info downloadNFormFile' id='nformFileIndex" + index +
                                     "' <i class='glyphicon glyphicon-download'></i>" +
                                     "<span>Download</span>" +
                                     "</a>"))

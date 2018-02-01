@@ -65,11 +65,11 @@ public class NfReportController {
 
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        NfUser user = userService.findUserByEmail(auth.getName());
+        NfUser user = userService.findUserByUsername(auth.getName());
 
-        if(user == null){
-            user = userService.findUserByUsername(auth.getName());
-        }
+//        if(user == null){
+//            user = userService.findUserByUsername(auth.getName());
+//        }
         NfReport reportObject = null;
         if (report != null) {
             try {
@@ -114,7 +114,7 @@ public class NfReportController {
 
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        NfUser user = userService.findUserByEmail(auth.getName());
+        NfUser user = userService.findUserByUsername(auth.getName());
 
 
         report.setUser(user);
@@ -138,7 +138,7 @@ public class NfReportController {
 
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        NfUser user = userService.findUserByEmail(auth.getName());
+        NfUser user = userService.findUserByUsername(auth.getName());
 
 //
 ////        NfReport report = nfReportService.findReportByReportId(id);

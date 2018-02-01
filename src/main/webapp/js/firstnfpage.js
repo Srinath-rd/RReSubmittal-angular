@@ -18,34 +18,34 @@
 
     $("#cancel").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:8080/rresubmittal/api/";
+        window.location.href = "http://localhost:8080/rresubmittal/";
     });
 
     $("#next1").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:8080/rresubmittal/api/wizardform1";
+        window.location.href = "http://localhost:8080/rresubmittal/wizardform1";
     });
 
     $("#next2").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:8080/rresubmittal/api/wizardform2";
+        window.location.href = "http://localhost:8080/rresubmittal/wizardform2";
     });
 
     $("#next3").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:8080/rresubmittal/api/wizardform3";
+        window.location.href = "http://localhost:8080/rresubmittal/wizardform3";
     });
     $("#next4").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:8080/rresubmittal/api/wizardform4";
+        window.location.href = "http://localhost:8080/rresubmittal/wizardform4";
     });
     $("#next5").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:8080/rresubmittal/api/wizardform5";
+        window.location.href = "http://localhost:8080/rresubmittal/wizardform5";
     });
     $("#previous1").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:8080/rresubmittal/api/list-todos";
+        window.location.href = "http://localhost:8080/rresubmittal/list-todos";
     });
 
     $(document).on('click', '.addmore', function (e) {

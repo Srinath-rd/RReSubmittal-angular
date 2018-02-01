@@ -264,7 +264,7 @@
                 },
                 success: function () {
                     alert("success");
-                    $(location).attr('href', '/rresubmittal/api/')
+                    $(location).attr('href', '/rresubmittal/')
                 },
                 error: function () {
                     alert("error");

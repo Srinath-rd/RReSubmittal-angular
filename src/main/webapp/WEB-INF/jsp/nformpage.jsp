@@ -11,7 +11,7 @@
         <%@ include file="common/headera.jspf" %>
         <%--<%@ include file="common/navigationa.jspf" %>--%>
         <div>
-            <div>  <button class="pull-left btn btn-xs btn-primary"   onclick="window.location='/rresubmittal/api/';">Back</button></div>
+            <div>  <button class="pull-left btn btn-xs btn-primary"   onclick="window.location='/rresubmittal/';">Back</button></div>
             <div><button class="btn-xs btn btn-primary hidden-print pull-right" onclick="printpage()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</button></div>
             <div>  <button class="pull-right btn btn-xs btn-danger" id="saveNformAndExit">Save and Exit</button></div>
         </div>
@@ -20,6 +20,7 @@
         <span style="display: none" id="reportId">${report.reportId}</span>
         <span style="display: none" id="userFirstname">${user.firstName}</span>
         <span style="display: none" id="userLastname">${user.lastName}</span>
+        <span style="display: none" id="username">${user.username}</span>
         <span style="display: none" id="userEmail">${user.email}</span>
         <div id="notifForm">
             <div>

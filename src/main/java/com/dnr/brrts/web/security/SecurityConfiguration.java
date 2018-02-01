@@ -62,7 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/home")
-                .usernameParameter("email")
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

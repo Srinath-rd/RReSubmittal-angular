@@ -11,11 +11,11 @@ public interface NfReportService {
     NfReport saveNfReport(NfReport report, boolean formComplete);
 
 
-    List<NfReport> findReportsByUserName(String email);
+    List<NfReport> findReportsByUserName(String username);
 
     NfReport buildNewReport(NfUser user, FormName formName);
 
-    List<NfReport> findReportsByUserNameAndStatus(String email, FormStatus pending);
+    List<NfReport> findReportsByUserNameAndStatus(String username, FormStatus pending);
 
     NfReport findReportByReportId(Long reportId);
 

@@ -38,7 +38,7 @@ public class NotificationFormController {
         logger.info("..............Inside showTodosAlt3 method..................");
         String name = userLoginUtility.getLoggedinUserName();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        NfUser user = userService.findUserByEmail(auth.getName());
+        NfUser user = userService.findUserByUsername(auth.getName());
         if ((auth instanceof AnonymousAuthenticationToken)) {
             return "forward:/login";
         }else {

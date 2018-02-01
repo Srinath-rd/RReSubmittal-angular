@@ -123,8 +123,8 @@ public class NfReportServiceImpl implements NfReportService {
     }
 
     @Override
-    public List<NfReport> findReportsByUserName(String email) {
-        NfUser user = userRepository.findByEmail(email);
+    public List<NfReport> findReportsByUserName(String username) {
+        NfUser user = userRepository.findByUsername(username);
         return reportRepository.findByUser_UserId(user.getUserId());
     }
 
@@ -156,8 +156,8 @@ public class NfReportServiceImpl implements NfReportService {
     }
 
     @Override
-    public List<NfReport> findReportsByUserNameAndStatus(String email, FormStatus pending) {
-        NfUser user = userRepository.findByEmail(email);
+    public List<NfReport> findReportsByUserNameAndStatus(String username, FormStatus pending) {
+        NfUser user = userRepository.findByUsername(username);
         List<NfReport> result = reportRepository.findByUser_UserIdAndStatus(user.getUserId(), pending);
         return result;
     }

@@ -210,7 +210,7 @@
             alert(data);
         },
         done: function (e, data) {
-            alert(data.result);
+            $("#reportId").text(data.result.reportId);
             $("tr:has(td)").remove();
             $.each(data.result.attachments, function (index, file) {
 
@@ -349,7 +349,7 @@
                 },
                 success: function () {
                     alert("success");
-                    //  $(location).attr('href', '/rresubmittal/api/')
+                    //  $(location).attr('href', '/rresubmittal/')
                 },
                 error: function () {
                     alert("error");
