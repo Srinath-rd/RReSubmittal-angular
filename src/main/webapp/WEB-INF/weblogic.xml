@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://xmlns.oracle.com/weblogic/weblogic-web-app
         http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
-    <wls:context-root>/RReSubmittal</wls:context-root>
+    <wls:context-root>/rresubmittal/api/</wls:context-root>
     <wls:container-descriptor>
         <!--<wls:prefer-application-packages>-->
         <!--<wls:package-name>org.slf4j.*</wls:package-name>-->
@@ -13,6 +13,8 @@
             <wls:package-name>org.slf4j</wls:package-name>
             <wls:package-name>org.apache.commons.*</wls:package-name>
             <wls:package-name>org.springframework.*</wls:package-name>
+            <wls:package-name>org.jboss.logging.*</wls:package-name>
+            <wls:package-name>com.fasterxml</wls:package-name>
         </wls:prefer-application-packages>
 
         <wls:prefer-application-resources>

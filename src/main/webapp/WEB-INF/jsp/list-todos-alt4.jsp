@@ -23,7 +23,7 @@
                                     <button type="button" data-toggle="collapse"
                                             data-parent="#accordion" data-target="#collapseOne"
                                             class="pull-right btn btn-secondary btn-sm"
-                                            id="detailsEditBtn">Edit
+                                            id="details-edit-btn">Edit
                                     </button>
                                 </h6>
                             </div>
@@ -144,8 +144,8 @@
 
 
                                             <div class="form-horizontal text-center">
-                                                <button type="submit" class="btn-md btn-primary" id="cancel">cancel</button>
-                                                <button type="submit" value="Next" class="btn-md btn-primary "
+                                                <button type="submit" class="btn btn-xs btn-primary" id="cancel">cancel</button>
+                                                <button type="submit" value="Next" class="btn btn-xs btn-primary "
                                                         id="dischToS">Submit
                                                 </button>
                                             </div>

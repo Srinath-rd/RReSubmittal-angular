@@ -85,14 +85,6 @@ public class TodoController {
         return "list-todos-alt";
     }
 
-    @RequestMapping(value = "/list-todos-alt3", method = RequestMethod.GET)
-    public String showTodosAlt3(ModelMap model) {
-        logger.info("..............Inside showTodosAlt3 method..................");
-        String name = getLoggedInUserName(model);
-        model.put("todos", service.retrieveTodos(name));
-        return "list-todos-alt3";
-    }
-
     @RequestMapping(value = "/list-todos-alt4", method = RequestMethod.GET)
     public String testFacility(ModelMap model) {
         logger.info("..............Inside showTodosAlt3 method..................");

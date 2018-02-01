@@ -1,12 +1,13 @@
 package com.dnr.brrts.web.repository;
-import com.dnr.brrts.web.model.User;
+import com.dnr.brrts.web.model.NfUser;
+import com.dnr.brrts.web.model.NfUser;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository  extends CrudRepository<User, Long> {
+public interface UserRepository  extends CrudRepository<NfUser, Long> {
 
 
-    User findByUserId(Long userId);
+    NfUser findByUserId(Long userId);
 
     @Override
-    User save(User user);
+    NfUser save(NfUser user);
 }

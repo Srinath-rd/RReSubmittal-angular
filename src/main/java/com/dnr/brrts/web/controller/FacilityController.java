@@ -47,17 +47,6 @@ public class FacilityController {
 
     }
 
-    @GetMapping("/substances")
-    public List<SubstanceRO> getAllSubstances() {
-
-        return substanceDetailRepository.getAllSubstances();
-    }
-
-    @GetMapping("/impacts")
-    public List<ImpactRO> getAllImpactList() {
-
-        return impactDetailRepository.getImpactList();
-    }
 
     @PostMapping("/facility")
     public void saveFacility(NfFacility facility){

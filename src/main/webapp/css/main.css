@@ -46,7 +46,7 @@
     box-sizing: content-box !important;
 }
 
-.errorMessage {
+.error-message {
     color: red;
 }
 
@@ -80,7 +80,7 @@ body {
     color: #333;
     background-color: #fff;
     font-family: Arial, sans-serif !important;
-    /*font-size: 10px !important;*/
+    font-size: 10px !important;
     margin: 0;
     padding: 0;
 }
@@ -219,4 +219,41 @@ h6 {
     height: 100%;
     width: 140px;
     background: #394e5f;
+    margin: 10px;
+}
+
+.list-group-item
+{
+    overflow:hidden;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+#applicationList {
+    margin: 2px;
+    padding-left: 100px;
+    height: 400px;
+    overflow:auto;
+}
+
+@media print {
+    /* your stylesheet for printing, eg.: */
+    #accordion .panel-collapse.collapse {
+        display: block;
+        height: auto;
+    }
+
+    body{
+        font-family: "Courier New";
+        font-size: 14pt; !important;
+    }
+
+    #map {
+        display: none;
+    }
+
 }

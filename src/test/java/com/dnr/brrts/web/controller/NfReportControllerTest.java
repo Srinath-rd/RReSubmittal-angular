@@ -8,16 +8,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
@@ -45,11 +44,12 @@ public class NfReportControllerTest {
         NfFacility facility = new NfFacility();
         report.setFacility(facility);
         NfPerson person = new NfPerson();
-        report.setReportedBy(person);
-        report.setCreatedDate(LocalDateTime.now());
+    //   report.setReportedBy(person);
+       report.setCreatedDate(LocalDateTime.now());
         report.setReportType("Test");
 
-        given(reportService.saveNfReport(report)).willReturn(report);
+        MultipartFile file = null;
+        given(reportService.saveNfReport(report, false)).willReturn(report);
 
 
     }

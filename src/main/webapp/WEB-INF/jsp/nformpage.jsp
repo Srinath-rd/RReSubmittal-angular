@@ -9,9 +9,18 @@
     <div class="wrapper">
         <!-- end container -->
         <%@ include file="common/headera.jspf" %>
-        <%@ include file="common/navigationa.jspf" %>
-        <h6 class="important">*Emergency Discharges / Spills should be
+        <%--<%@ include file="common/navigationa.jspf" %>--%>
+        <div>
+            <div>  <button class="pull-left btn btn-xs btn-primary"   onclick="window.location='/rresubmittal/api/';">Back</button></div>
+            <div><button class="btn-xs btn btn-primary hidden-print pull-right" onclick="printpage()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</button></div>
+            <div>  <button class="pull-right btn btn-xs btn-danger" id="saveNformAndExit">Save and Exit</button></div>
+        </div>
+        <h6 class="important" style="text-align: center">*Emergency Discharges / Spills should be
             reported via the 24-Hour Hotline: 1-800-943-0003</h6>
+        <span style="display: none" id="reportId">${report.reportId}</span>
+        <span style="display: none" id="userFirstname">${user.firstName}</span>
+        <span style="display: none" id="userLastname">${user.lastName}</span>
+        <span style="display: none" id="userEmail">${user.email}</span>
         <div id="notifForm">
             <div>
                 <form id="notificationForm">
@@ -21,15 +30,15 @@
                                 <h6 class="align-left">
                                     <span class="badge badge-primary">1 </span>Details
                                     <button type="button" data-toggle="collapse"
-                                            data-parent="#accordion" data-target="#collapseOne"
+                                            data-parent="#accordion" data-target="#collapse-one"
                                             class="pull-right btn btn-secondary btn-sm"
-                                            id="detailsEditBtn">Edit
+                                            id="details-edit-btn">Edit
                                     </button>
                                 </h6>
                             </div>
-                            <div id="collapseOne" class="panel-collapse collapse in">
+                            <div id="collapse-one" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <%@ include file="list-todosa.jsp" %>
+                                    <%@ include file="nfdetails.jsp" %>
 
                                 </div>
                             </div>
@@ -39,15 +48,15 @@
                                 <h6>
                                     <span class="badge">2</span>Site Information
                                     <button type="button" data-toggle="collapse"
-                                            data-parent="#accordion" data-target="#collapseTwo"
+                                            data-parent="#accordion" data-target="#collapse-two"
                                             class="pull-right btn btn-secondary btn-sm"
-                                            id="siteInfoEditBtn">Edit
+                                            id="site-info-edit-btn">Edit
                                     </button>
                                 </h6>
                             </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
+                            <div id="collapse-two" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <%@ include file="list-todosa1.jsp" %>
+                                    <%@ include file="nfsiteinfo.jsp" %>
                                 </div>
                             </div>
                         </div>
@@ -56,15 +65,15 @@
                                 <h6>
                                     <span class="badge">3 </span>Responsible Party
                                     <button type="button" data-toggle="collapse"
-                                            data-parent="#accordion" data-target="#collapseThree"
+                                            data-parent="#accordion" data-target="#collapse-three"
                                             class="pull-right btn btn-secondary btn-sm"
-                                            id="respPartyEditBtn">Edit
+                                            id="resp-party-edit-btn">Edit
                                     </button>
                                 </h6>
                             </div>
-                            <div id="collapseThree" class="panel-collapse collapse">
+                            <div id="collapse-three" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <%@ include file="list-todosa2.jsp" %>
+                                    <%@ include file="nfrpartydetails.jsp" %>
                                 </div>
                             </div>
                         </div>
@@ -74,15 +83,15 @@
                                 <h6>
                                     <span class="badge">4</span>Hazardous Substance Information
                                     <button type="button" data-toggle="collapse"
-                                            data-parent="#accordion" data-target="#collapseFour"
+                                            data-parent="#accordion" data-target="#collapse-four"
                                             class="pull-right btn btn-secondary btn-sm"
-                                            id="hzrdSubEditBtn">Edit
+                                            id="hzrd-sub-edit-btn">Edit
                                     </button>
                                 </h6>
                             </div>
-                            <div id="collapseFour" class="panel-collapse collapse">
+                            <div id="collapse-four" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <%@ include file="list-todosa3.jsp" %>
+                                    <%@ include file="nfhazardsubinfo.jsp" %>
 
                                 </div>
                             </div>
@@ -94,15 +103,15 @@
                                 <h6>
                                     <span class="badge">5</span>Impacts to the Environment
                                     <button type="button" data-toggle="collapse"
-                                            data-parent="#accordion" data-target="#collapseFive"
+                                            data-parent="#accordion" data-target="#collapse-five"
                                             class="pull-right btn btn-secondary btn-sm"
-                                            id="impactsEditBtn">Edit
+                                            id="impacts-edit-btn">Edit
                                     </button>
                                 </h6>
                             </div>
-                            <div id="collapseFive" class="panel-collapse collapse">
+                            <div id="collapse-five" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <%@ include file="list-todosa4.jsp" %>
+                                    <%@ include file="nfimpactsinfo.jsp" %>
                                 </div>
                             </div>
 
@@ -112,15 +121,15 @@
                                     <h6>
                                         <span class="badge">6</span>Federal Energy Requirements
                                         <button type="button" data-toggle="collapse"
-                                                data-parent="#accordion" data-target="#collapseSix"
+                                                data-parent="#accordion" data-target="#collapse-six"
                                                 class="pull-right btn btn-secondary btn-sm"
-                                                id="sourceCauseEditBtn">Edit
+                                                id="source-cause-edit-btn">Edit
                                         </button>
                                     </h6>
                                 </div>
-                                <div id="collapseSix" class="panel-collapse collapse">
+                                <div id="collapse-six" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        <%@ include file="list-todosa5.jsp" %>
+                                        <%@ include file="nfsourcesinfo.jsp" %>
 
                                     </div>
                                 </div>
@@ -134,7 +143,7 @@
 
         </div>
         <div id="confirmationMsg" style="display: none; height: 600px">
-            <p>Thanks for submitting the information! A notification email
+            <p class="alert-success">Thanks for submitting the information! A notification email
                 will be sent to you shortly.</p>
 
         </div>

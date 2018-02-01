@@ -3,7 +3,7 @@
 
     <div id="errorDiv">
 
-        <span style="display: none" class="errorMessage" id="errorMessage"></span>
+        <span style="display: none" class="errorMessage" id="error-message"></span>
     </div>
 
     <br> <label>Impacts to the environment (Please select from the list below and click on add button)</label> <span
@@ -12,21 +12,8 @@
 
     <div class="form-group row">
         <div class="col-xs-10">
-            <select class="form-control form-control-sm input-sm" id="envImpacts">
+            <select class="form-control form-control-sm input-sm" id="envImpacts" disabled>
             </select>
-        </div>
-        <div class="col-xs-2">
-            <button type="button" class="btn-md btn-info btn-md"
-                    id="envImpactPlusButton">
-                Add
-                <!-- 				<span class="glyphicon glyphicon-plus-sign"></span> -->
-            </button>
-            <button type="button" class="btn-md btn-danger btn-md"
-                    id="envImpactMinusButton">
-                Remove
-                <!-- 				<span class="glyphicon glyphicon-minus-sign"></span> -->
-            </button>
-
         </div>
 
 
@@ -34,15 +21,14 @@
     <div class="form-group">
         <div id="checkImpactProb">
             <label class="radio-inline control-label"> <input id="radio1"
-                                                              name="chkimpact-input" type="radio" value="Potential">
+                                                              name="chkimpact-input" type="radio" value="Potential" disabled>
                 Potential
             </label> <label class="radio-inline control-label"> <input
-                id="radio2" name="chkimpact-input" type="radio" value="Known"> Known
+                id="radio2" name="chkimpact-input" type="radio" value="Known" disabled> Known
         </label>
         </div>
     </div>
-    <label>Please select an item to delete it</label>
-    <ol class="selectable list-group" id="envImpactList" style="height: 200px; overflow: scroll;">
+    <ol class="list-group" id="envImpactList" style="height: 200px; overflow: scroll; width: 60%">
     </ol>
     <br> <br>
 
@@ -51,10 +37,10 @@
         <label>Lab results:</label>
         <div class="form-group">
             <label class="checkbox-inline custom-control">
-                <input type="checkbox" id="labResultsMailChkbox" value="">I will mail/email the lab results
+                <input type="checkbox" id="labResultsMailChkbox" value="" disabled>I will mail/email the lab results
             </label>
             <label class="checkbox-inline custom-control">
-                <input type="checkbox" id="labResultsAttchmntChkbox" value="">I will attach the lab results right now
+                <input type="checkbox" id="labResultsAttchmntChkbox" value="" disabled>I will attach the lab results right now
             </label>
         </div>
     </div>
@@ -62,18 +48,6 @@
     <div id="more-info" style="display: block">
 
         <div>
-
-            <%--<input id="fileupload" type="file" name="files[]" data-url="nformfiles/upload" multiple>--%>
-            <span class="btn btn-info fileinput-button">
-                    <i class="icon-plus icon-white"></i>
-                    <span>Add files...</span>
-                    <input id="fileupload" type="file" name="files[]"  multiple data-url="nformfiles/upload" >
-            </span>
-            <div id="dropzone" class="fade well">Drop files here</div>
-
-            <div id="progress" class="progress">
-                <div class="progress-bar bar" role="progressbar" style="width: 0%;"></div>
-            </div>
 
             <table id="uploaded-files" class="table table-striped">
                 <tr>
@@ -85,6 +59,7 @@
             </table>
 
         </div>
+
     </div>
 
     <!-- 	`<div id="more-info"> -->
@@ -147,17 +122,6 @@
 
     <br>
 
-    <div class="form-horizontal text-center">
-        <button type="submit" value="Cancel" name="_cancel"
-                class="btn-md btn-primary " id="cancel">Cancel
-        </button>
-        <button type="submit" value="Cancel" name="_cancel"
-                class="btn-md btn-primary " id="impctsInfoToHzrdInfoBtn">Previous
-        </button>
-        <button type="submit" value="Next" name="_target1"
-                class="btn-md btn-primary" id="impctsInfoToCauseInfoBtn">Next
-        </button>
-    </div>
 
     <!-- 	</div> -->
 

@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class NfFacilityRepositoryTest {
 
 
-    private final static Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+    private final static Logger logger = LoggerFactory.getLogger(NfFacilityRepositoryTest.class);
 
     @Autowired
     @Qualifier("facilityRepository")

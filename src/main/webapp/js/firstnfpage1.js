@@ -1,17 +1,19 @@
 (function () {
 
-    $("#errorMessage").empty();
-    $("#errorMessage").hide();
-    $("#detailsEditBtn").hide();
-    $("#siteInfoEditBtn").hide();
-    $("#respPartyEditBtn").hide();
-    $("#hzrdSubEditBtn").hide();
-    $("#impactsEditBtn").hide();
-    $("#sourceCauseEditBtn").hide();
+    $("#forms-directory").click();
+    $("#error-message").empty();
+    $("#error-message").hide();
+    $("#details-edit-btn").hide();
+    $("#site-info-edit-btn").hide();
+    $("#resp-party-edit-btn").hide();
+    $("#hzrd-sub-edit-btn").hide();
+    $("#impacts-edit-btn").hide();
+
+    $("#source-cause-edit-btn").hide();
 
     $("#cancel").click(function (e) {
         e.preventDefault();
-        window.location.href = "http://localhost:7001/RReSubmittal/";
+        window.location.href = "http://localhost:7001/rresubmittal/api/";
     })
     var buttonId = ""
     var buttonClick = function () {
@@ -21,73 +23,93 @@
 
     $(document).on('click', '.addmore', function (e) {
         e.preventDefault();
-        var next = this.id.charAt(8);
-        var addTo = "#responsibleParty" + next;
-        var addRemove = "#button" + (next);
-        next = parseInt(next) + 1;
-        var newInput = '<div id="responsibleParty' + next + '">' +
+        var index = this.id.charAt(8);
+        var addTo = "#responsibleParty" + index;
+        var addRemove = "#button" + (index);
+        var index = parseInt(index) + 1;
+        var newInput = '<div id="responsibleParty' + index + '" class="elmt">' +
             '<div class="form-group row">' +
-            '<div class="col-xs-6" id="fnameGrp">' +
-            '<label for="fname" class="control-label">First name:</label> <input type="text"' +
-            'class="form-control input-sm" id="fname" name="fname" placeholder="Please enter the first name"> <span class="fnameRepBy error" style="display:none;">This is a required field.</span>' +
+            '<div class="col-xs-6">' +
+            '<span style="display: none" id="rparty-person-id' + index + '"></span>' +
+            '<label for="rparty-fname' + index + '" >First name:</label> <input type="text"' +
+            'class="form-control input-sm" id="rparty-fname' + index + '" name="fname" placeholder="Please enter the first name"> ' +
+            '<span class="fname-rep-by error" style="display:none;">This is a required field.</span>' +
             '</div>' +
-            '<div class="col-xs-6" id="lnameGrp">' +
-            '<label for="lname">Last name:</label> <input type="text"' +
-            'name="lname" class="form-control input-sm" id="lname" placeholder="Please enter the last name"> <span class="lnameRepBy error" style="display:none;">This is a required field.</span>' +
+            '<div class="col-xs-6">' +
+            '<label for="rparty-lname' + index + '">Last name:</label> <input type="text"' +
+            'name="lname" class="form-control input-sm" id="rparty-lname' + index + '" placeholder="Please enter the last name"> ' +
+            '<span class="lname-rep-by error" style="display:none;">This is a required field.</span>' +
             '</div>' +
             '</div>' +
             '<div class="form-group row"> ' +
             '<div class="col-xs-6"> ' +
-            '<label for="companyName">Company</label> <input type="text"  ' +
-            'class="form-control input-sm" id="cname" name="companyName" placeholder="Please enter the company name"> ' +
+            '<label for="rparty-cname' + index + '">Company</label> <input type="text"  ' +
+            'class="form-control input-sm" id="rparty-cname' + index + '" name="companyName" placeholder="Please enter the company name"> ' +
             '</div> ' +
             '<div class="col-xs-3"> ' +
-            '<label for="phoneNumber">Phone Number</label> <input type="text" ' +
-            'class="form-control input-sm" id="phoneNumber" name="phoneNumber" placeholder="Please enter valid phone number"> ' +
+            '<label for="rparty-phone-number' + index + '">Phone Number</label> <input type="text" ' +
+            'class="form-control input-sm" id="rparty-phone-number' + index + '" name="phoneNumber" placeholder="Please enter valid phone number"> ' +
             '</div>  ' +
             '<div class="col-xs-3">  ' +
-            '<label for="email">Email</label> <input type="email" ' +
-            'class="form-control input-sm" id="email" name="email" placeholder="Please enter valid email address"> ' +
+            '<label for="rparty-email' + index + '">Email</label> <input type="email" ' +
+            'class="form-control input-sm" id="rparty-email' + index + '" name="email" placeholder="Please enter valid email address"> ' +
             '</div> ' +
             '</div> ' +
             '<div class="form-group row"> ' +
             '<div class="col-xs-6"> ' +
-            '<label for="address">Address:</label> <input type="text" ' +
-            'class="form-control input-sm" onfocus="geolocate()" id="autocomplete_rp' + next + '" name="address" placeholder="Please enter the address"> ' +
+            '<span style="display: none" id="rparty-person-addressid' + index + '"></span>' +
+            '<label for="rparty-address' + index + '">Address:</label> <input type="text" ' +
+            'class="form-control input-sm" onfocus="geolocate()" id="rparty-address' + index + '" name="address" placeholder="Please enter the address" onfocus="geolocate()"> ' +
             '</div>  ' +
             '<div class="col-xs-3">  ' +
-            '<label for="city">City:</label> <input type="text" ' +
-            'class="form-control field input-sm" id="city_rp' + next + '" name="city" readonly="readonly"> ' +
+            '<label for="rparty-city' + index + '">City:</label> <input type="text" ' +
+            'class="form-control field input-sm" id="rparty-city' + index + '" name="city" readonly="readonly"> ' +
             '</div> ' +
             '<div class="col-xs-1"> ' +
-            '<label for="state">State:</label> <input type="text" ' +
-            'class="form-control field input-sm" id="state_rp' + next + '" name="state" readonly="readonly"> ' +
+            '<label for="rparty-state' + index + '">State:</label> <input type="text" ' +
+            'class="form-control field input-sm" id="rparty-state' + index + '" name="state" readonly="readonly"> ' +
             '</div> ' +
             '<div class="col-xs-2"> ' +
-            '<label for="zipcode">ZIP code:</label> <input type="text" ' +
-            'class="form-control field input-sm" id="zipcode+rp' + next + '" name="zipcode" readonly="readonly">' +
+            '<label for="rparty-zipcode' + index + '">ZIP code:</label> <input type="text" ' +
+            'class="form-control field input-sm" id="rparty-zipcode' + index + '" name="zipcode" readonly="readonly">' +
             '</div> ' +
             '</div>' +
             '<div class="form-group">' +
-            '<div id="button' + next + '">' +
-            '<button id="add-more' + next + '"  class="btn-md btn-primary addmore">Add More</button>' +
+            '<div id="button' + index + '">' +
+            '<button id="add-more' + index + '"  class="btn btn-xs btn-primary addmore">Add More</button>' +
             '</div>' +
             '</div>' +
             '</div>';
         //	var newInput = ""
-        var removeBtn = '<button id="remove' + (next - 1) + '" class="btn-md btn-danger remove-me" >Remove</button>';
+
+        var removeBtn = '<button id="remove' + (index - 1) + '" class="btn btn-xs btn-danger remove-me" >Remove</button>';
         $(addTo).after(newInput);
         $(addRemove).empty();
         $(addRemove).append(removeBtn);
-
+        assignAutoCompl(index);
 
     });
+
+
     $(document).on('click', '.remove-me', function (e) {
         e.preventDefault();
         var fieldNum = this.id.charAt(this.id.length - 1);
-        var fieldID = "#responsibleParty" + fieldNum;
-        $(this).remove();
-        $(fieldID).remove();
+        if(fieldNum == 0){
+            $("#rparty-fname0").val("");
+            $("#rparty-lname0").val("");
+            $("#rparty-cname0").val("");
+            $("#rparty-phone-number0").val("");
+            $("#rparty-email0").val("");
+            $("#rparty-address0").val("");
+            $("#rparty-city0").val("");
+            $("#rparty-state0").val("");
+            $("#rparty-zipcode0").val("");
+        }else {
+            var fieldID = "#responsibleParty" + fieldNum;
+            $(this).remove();
+            $(fieldID).remove();
+        }
+
     });
 
 
@@ -110,20 +132,21 @@
     })
 
     $(document).on('click', '#envImpactPlusButton', function () {
-        $("#errorMessage").empty();
-        $("#errorMessage").css("display", "none");
+        $("#error-message").empty();
+        $("#error-message").css("display", "none");
         var selectedValue = $("#envImpacts").find("option:selected").text();
         if ($('input[name=chkimpact-input]:checked').length <= 0) {
-            $("#errorMessage").css("display", "");
-            $("#errorMessage").append("Please select 'known' or 'potential' for the selected element");
-            $("#errorMessage").show();
+            $("#error-message").css("display", "");
+            $("#error-message").append("Please select 'known' or 'potential' for the selected element");
+            $("#error-message").show();
         } else {
             var index = $("#envImpactList").children().length + 1;
             var checkedImpact = $('input[name=chkimpact-input]:checked').val();
             var element = '<li class="ui-widget-content list-group-item" title="Please select an item to delete it." id="' + index + '">' + checkedImpact + '-' + selectedValue + '</li>';
             $("#envImpactList").append(element);
         }
-    })
+    });
+
 
     $("#datepickerui").datepicker();
     $("#notificationForm").validate({
@@ -142,11 +165,15 @@
         }
     });
 
+
 })();
 
 
 var placeSearch,
-    autocomplete_rp1;
+    autocomplete,
+    _autocomplete,
+    autocomplete_rp1,
+    autocomplete_siteAddress;
 
 var componentForm = {
     street_number: 'short_name',
@@ -160,12 +187,17 @@ function initAutoComplete() {
     // Create the autocomplete object, restricting the search to geographical
     // location types.
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */ (document.getElementById('autocomplete')),
+        /** @type {!HTMLInputElement} */ (document.getElementById('reporter-address')),
         {
             types: ['geocode']
         });
 
-    autocomplete_rp1 = new google.maps.places.Autocomplete((document.getElementById('autocomplete_rp1')), {
+    autocomplete_rp1 = new google.maps.places.Autocomplete((document.getElementsByClassName('rparty-autocomplete')[0]), {
+        types: ['geocode']
+    });
+
+
+    autocomplete_siteAddress = new google.maps.places.Autocomplete((document.getElementById(('site-address'))), {
         types: ['geocode']
     });
 
@@ -174,7 +206,76 @@ function initAutoComplete() {
     // fields in the form.
     autocomplete.addListener('place_changed', fillInAddress);
     autocomplete_rp1.addListener('place_changed', fillInAddress_rp)
+    autocomplete_siteAddress.addListener('place_changed', fillInSiteAddress)
 }
+
+// $("body").on("keydown.autocomplete", '.rparty-autocomplete', function() {
+//     var id = this.id;
+//     autocomplete_rp1.addListener('place_changed', fillInAddress_rp(id));
+// });
+function assignAutoCompl(index) {
+
+    // _autocomplete.push(new google.maps.places.Autocomplete((document.getElementById('rparty-address' + _id)), {
+    //     types: ['geocode']
+    // }));
+    var input = document.getElementById('rparty-address' + index);
+    _autocomplete = new google.maps.places.Autocomplete(input, {
+        types: ['geocode']
+    });
+
+
+    function fillinRPAddress(index) {
+            // Get the place details from the autocomplete object.
+            // alert(this.getAttribute('id'));
+
+            var place = _autocomplete.getPlace();
+            for (var component in componentForm) {
+                if ((component != "street_number") && (component != "route")) {
+                    if(component === 'locality') {
+                        document.getElementById('rparty-city' + index).value = '';
+                        document.getElementById('rparty-city' + index).disabled = false;
+                    }else if(component === 'administrative_area_level_1'){
+                        document.getElementById('rparty-state' + index).value = '';
+                        document.getElementById('rparty-state' + index).disabled = false;
+                    }else  if(component === 'postal_code'){
+                        document.getElementById('rparty-zipcode'+ index).value = '';
+                        document.getElementById('rparty-zipcode'+ index).disabled = false;
+                    }
+                }
+            }
+
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            var streetAddress = "";
+            if (place != undefined)
+                for (var i = 0; i < place.address_components.length; i++) {
+                    var addressType = place.address_components[i].types[0];
+
+                    if (componentForm[addressType]) {
+                        var val = place.address_components[i][componentForm[addressType]];
+                        if ((addressType === 'locality')) {
+                            document.getElementById('rparty-city' + index).value = val;
+                        } else if ((addressType === 'administrative_area_level_1')) {
+                            document.getElementById('rparty-state' + index).value = val;
+                        } else if ((addressType === 'postal_code')) {
+                            document.getElementById('rparty-zipcode' + index).value = val;
+                        } else {
+                            streetAddress = streetAddress + " " + val;
+                            document.getElementById('rparty-address' + index).value = streetAddress;
+                        }
+                    }
+                }
+
+
+    }
+
+    google.maps.event.addListener(_autocomplete, 'place_changed', function () {
+        fillinRPAddress(index);
+    });
+}
+
+
+
 
 function fillInAddress() {
     // Get the place details from the autocomplete object.
@@ -182,8 +283,16 @@ function fillInAddress() {
 
     for (var component in componentForm) {
         if ((component != "street_number") && (component != "route")) {
-            document.getElementById(component).value = '';
-            document.getElementById(component).disabled = false;
+            if(component === 'locality') {
+                document.getElementById('reporter-city').value = '';
+                document.getElementById('reporter-city').disabled = false;
+            }else if(component === 'administrative_area_level_1'){
+                document.getElementById('reporter-state').value = '';
+                document.getElementById('reporter-state').disabled = false;
+            }else  if(component === 'postal_code'){
+                document.getElementById('reporter-zipcode').value = '';
+                document.getElementById('reporter-zipcode').disabled = false;
+            }
         }
     }
 
@@ -195,25 +304,45 @@ function fillInAddress() {
 
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
-            if ((addressType != "street_number") && (addressType != "route")) {
-                document.getElementById(addressType).value = val;
+            // if ((addressType != "street_number") && (addressType != "route")) {
+            //     document.getElementById(addressType).value = val;
+            // } else {
+            //     streetAddress = streetAddress + " " + val;
+            //     document.getElementById('autocomplete').value = streetAddress;
+            // }
+
+            if ((addressType === 'locality')) {
+                document.getElementById('reporter-city').value = val;
+            } else if ((addressType === 'administrative_area_level_1')) {
+                document.getElementById('reporter-state').value = val;
+            } else if ((addressType === 'postal_code')) {
+                document.getElementById('reporter-zipcode').value = val;
             } else {
                 streetAddress = streetAddress + " " + val;
-                document.getElementById('autocomplete').value = streetAddress;
+                document.getElementById('reporter-address').value = streetAddress;
             }
         }
     }
 }
 
 function fillInAddress_rp() {
+
+
     // Get the place details from the autocomplete object.
     // alert(this.getAttribute('id'));
     var place = autocomplete_rp1.getPlace();
-
     for (var component in componentForm) {
         if ((component != "street_number") && (component != "route")) {
-            document.getElementById(component).value = '';
-            document.getElementById(component).disabled = false;
+            if(component === 'locality') {
+                document.getElementById('rparty-city0').value = '';
+                document.getElementById('rparty-city0').disabled = false;
+            }else if(component === 'administrative_area_level_1'){
+                document.getElementById('rparty-state0').value = '';
+                document.getElementById('rparty-state0').disabled = false;
+            }else  if(component === 'postal_code'){
+                document.getElementById('rparty-zipcode0').value = '';
+                document.getElementById('rparty-zipcode0').disabled = false;
+            }
         }
     }
 
@@ -226,14 +355,56 @@ function fillInAddress_rp() {
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
             if ((addressType === 'locality')) {
-                document.getElementById('city_rp1').value = val;
+                document.getElementById('rparty-city0').value = val;
             } else if ((addressType === 'administrative_area_level_1')) {
-                document.getElementById('state_rp1').value = val;
+                document.getElementById('rparty-state0').value = val;
             } else if ((addressType === 'postal_code')) {
-                document.getElementById('zipcode_rp1').value = val;
+                document.getElementById('rparty-zipcode0').value = val;
             } else {
                 streetAddress = streetAddress + " " + val;
-                document.getElementById('autocomplete_rp1').value = streetAddress;
+                document.getElementById('rparty-address0').value = streetAddress;
+            }
+        }
+    }
+}
+function fillInSiteAddress() {
+
+
+    // Get the place details from the autocomplete object.
+    // alert(this.getAttribute('id'));
+    var place = autocomplete_siteAddress.getPlace();
+    for (var component in componentForm) {
+        if ((component != "street_number") && (component != "route")) {
+            if(component === 'locality') {
+                document.getElementById('site-city').value = '';
+                document.getElementById('site-city').disabled = false;
+            }else if(component === 'administrative_area_level_1'){
+                document.getElementById('site-state').value = '';
+                document.getElementById('site-state').disabled = false;
+            }else  if(component === 'postal_code'){
+                document.getElementById('site-zipcode').value = '';
+                document.getElementById('site-zipcode').disabled = false;
+            }
+        }
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    var streetAddress = "";
+    for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+
+        if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            if ((addressType === 'locality')) {
+                document.getElementById('site-city').value = val;
+            } else if ((addressType === 'administrative_area_level_1')) {
+                document.getElementById('site-state').value = val;
+            } else if ((addressType === 'postal_code')) {
+                document.getElementById('site-zipcode').value = val;
+            } else {
+                streetAddress = streetAddress + " " + val;
+                document.getElementById('site-address').value = streetAddress;
             }
         }
     }
@@ -253,6 +424,9 @@ function geolocate() {
                 radius: position.coords.accuracy
             });
             autocomplete.setBounds(circle.getBounds());
+            autocomplete_siteAddress.setBounds(circle.getBounds());
+            autocomplete_rp1.setBounds(circle.getBounds());
+            _autocomplete.setBounds(circle.getBounds());
         });
     }
 }
@@ -353,4 +527,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 function initialize() {
     //	   initMap();
     initAutoComplete();
+}
+
+function printpage() {
+    window.print();
 }

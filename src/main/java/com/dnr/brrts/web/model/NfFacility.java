@@ -1,27 +1,28 @@
 package com.dnr.brrts.web.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "SW_RRESUBM_FACILITY")
-public class NfFacility {
+public class NfFacility extends Auditable {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "facid_generator")
-//    @SequenceGenerator(name = "facid_generator", sequenceName = "sw_eform_facilityid_seq", allocationSize = 1)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "facid_generator")
+   @SequenceGenerator(name = "facid_generator", sequenceName = "sw_rresubm_facilityid_seq", allocationSize = 1)
     private Long facilityId;
     private String facilityName;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "facility", cascade = CascadeType.ALL)
-    private List<NfReport> nfReportList;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "facility", cascade = CascadeType.ALL)
+//    private Set<NfReport> nfReportList;
+
+    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "facility", cascade = CascadeType.ALL)
+    private Set<NfAddress> addresses = new HashSet<>();
 
     public NfFacility() {
         super();
@@ -43,19 +44,25 @@ public class NfFacility {
         this.facilityName = facilityName;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public boolean addAddress(NfAddress address){
+        address.setFacility(this);
+        return this.getAddresses().add(address);
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
+
+//    public Set<NfReport> getNfReportList() {
+//        return nfReportList;
+//    }
+//
+//    public void setNfReportList(Set<NfReport> nfReportList) {
+//        this.nfReportList = nfReportList;
+//    }
+
+    public Set<NfAddress> getAddresses() {
+        return addresses;
     }
 
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setAddresses(Set<NfAddress> addresses) {
+        this.addresses = addresses;
     }
 }

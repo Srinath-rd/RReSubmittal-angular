@@ -1,40 +1,46 @@
 (function () {
+    var contextPath = $("#context").text();
     var xvalue = $("#x-info").text();
     var yvalue = $("#y-info").text();
 
     $("#wtmx").val(xvalue);
     $("#wtmy").val(yvalue);
+
+    var reportId = $("#reportId").text();
+
+
+
     var validateSiteInformation = function () {
         var isValid1 = false;
         var isValid2 = false;
         var isValid3 = false;
 
-        if ($("#siteName").val() === "") {
-            $("#siteNameDiv").addClass("has-error");
-            $(".siteNameError").show();
+        if ($("#sit-name").val() === "") {
+            $("#site-name-div").addClass("has-error");
+            $(".site-name-error").show();
             isValid1 = false;
         } else {
-            $("#siteNameDiv").removeClass("has-error");
-            $(".siteNameError").hide();
+            $("#site-name-div").removeClass("has-error");
+            $(".site-name-error").hide();
             isValid1 = true;
         }
-        if ($("#siteLongitude").val() === "") {
-            $("#siteLongitudeDiv").addClass("has-error");
-            $(".siteLonError").show();
+        if ($("#site-longitude").val() === "") {
+            $("#site-longitude-div").addClass("has-error");
+            $(".site-lon-error").show();
             isValid2 = false;
         } else {
-            $("#siteLongitude").removeClass("has-error");
-            $(".siteLonError").hide();
+            $("#site-longitude").removeClass("has-error");
+            $(".site-lon-error").hide();
             isValid2 = true;
         }
 
-        if ($("#siteLatitude").val() === "") {
-            $("#siteLatitudeDiv").addClass("has-error");
-            $(".siteLatError").show();
+        if ($("#site-latitude").val() === "") {
+            $("#site-latitude-div").addClass("has-error");
+            $(".site-lat-error").show();
             isValid3 = false;
         } else {
-            $("#siteLatitudeDiv").removeClass("has-error");
-            $(".siteLatError").hide();
+            $("#site-latitude-div").removeClass("has-error");
+            $(".site-lat-error").hide();
             isValid3 = true;
         }
         if (isValid1 && isValid2 && isValid3) {
@@ -45,7 +51,7 @@
     }
 
 
-    $("#siteName").autocomplete({
+    $("#site-name").autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: "facilities",
@@ -86,38 +92,148 @@
             console.log(data.item.address.county);
             console.log(data.item.address.zipcode);
             console.log(data.item.address.state);
-            $("#siteAddress").val(data.item.address.streetAddress1);
-            $("#siteCity").val(data.item.address.city);
-            $("#siteCounty").val(data.item.address.county);
-            $("#siteState").val(data.item.address.state);
-            $("#siteZipcode").val(data.item.address.zipcode);
+            $("#site-address").val(data.item.address.streetAddress1);
+            $("#site-city").val(data.item.address.city);
+            $("#site-county").val(data.item.address.county);
+            $("#site-state").val(data.item.address.state);
+            $("#site-zipcode").val(data.item.address.zipcode);
             var completeAddr = data.item.address.streetAddress1 + " " +
                 data.item.address.city + " " +
                 data.item.address.state + " " +
                 data.item.address.zipcode;
-            $("#siteCompleteAddr").val(completeAddr);
-            $("#siteLocate").click();
+            $("#site-complete-addr").val(completeAddr);
+            $("#site-locate").click();
         }
     });
 
-    $("#siteToRespPartyBtn").click(function (evt) {
+    $("#site-to-resp-party-btn").click(function (evt) {
         evt.preventDefault();
         if (validateSiteInformation()) {
-            $("#collapseTwo").collapse("hide");
-            $("#collapseThree").collapse("show");
-            $("#siteInfoEditBtn").show();
+            $("#collapse-two").collapse("hide");
+            $("#collapse-three").collapse("show");
+            $("#site-info-edit-btn").show();
         }
 
     });
 
 
-    $("#siteToDischBtn").click(function (evt) {
+    $("#site-to-disch-btn").click(function (evt) {
         evt.preventDefault();
 
-        $("#collapseTwo").collapse("hide");
-        $("#collapseOne").collapse("show");
-        $("#siteInfoEditBtn").show();
+        $("#collapse-two").collapse("hide");
+        $("#collapse-one").collapse("show");
+        $("#site-info-edit-btn").show();
 
+    });
+
+
+    var buildJsonObject = function () {
+        var report;
+        var checkSelector = $('input[name=hzrd-type-radio]:checked');
+        var reportType = checkSelector.val();
+        var reportTypeText = '';
+        if (reportType === 'other') {
+            reportTypeText = reportType + '-' + $("#hazard-type-text-area").text();
+        } else {
+            reportTypeText = reportType;
+        }
+
+        var reporterFname = $("#reporter-fname").val();
+        var reporterLname = $("#reporter-lname").val();
+        var reporterEmail = $("#reporter-email").val();
+        var reporterCname = $("#reporter-cname").val();
+        var reporterPhoneNumber = $("#reporter-phone-number").val();
+        var reporterAddress = $("#reporter-address").val();
+        var reporterCity = $("#reporter-city").val();
+        var reporterState = $("#reporter-state").val();
+        var reporterZipcode = $("#reporter-zipcode").val();
+
+
+        var siteName = $("#site-name").val();
+        var siteAddress = $("#site-address").val();
+        var siteMunicipality = $("#site-municipality").val();
+        var siteCity = $("#site-city").val();
+        var siteState = $("#site-state").val();
+        var siteZipcode = $("#site-zipcode").val();
+        var siteCounty= $("#site-county").val();
+        var longitude = $("#site-longitude").val();
+        var latitude = $("#site-latitude").val();
+        var reporterPersonId = $("#reporter-person-id").text();
+        var reporterPersonAddressId = $("#reporter-person-address-id").text();
+
+        var facilityId = $("#site-id").text();
+        var facilityAddId = $("#site-address-id").text();
+        report = {
+            "reportId": reportId,
+            "reportType": reportTypeText,
+            "reportPersons": [
+                {
+                    "person": {
+                        "personId": reporterPersonId,
+                        "firstName": reporterFname,
+                        "lastName": reporterLname,
+                        "companyName": reporterCname,
+                        "email": reporterEmail,
+                        "phoneNumber": reporterPhoneNumber,
+                        "addresses": [
+                            {
+                                "addressId": reporterPersonAddressId,
+                                "address1": reporterAddress,
+                                "city": reporterCity,
+                                "state": reporterState,
+                                "zipcode": reporterZipcode
+                            }
+                        ]
+                    },
+                    "personType": "reporter"
+                }],
+            "facility": {
+                "facilityId": facilityId,
+                "facilityName": siteName,
+                "addresses": [
+                    {
+                        "addressId": facilityAddId,
+                        "address1": siteAddress,
+                        "address2": '',
+                        "city": siteCity,
+                        "county": siteCounty,
+                        "municipality": siteMunicipality,
+                        "latitude": latitude,
+                        "longitude": longitude,
+                        "zipcode": siteZipcode,
+                        "state": siteState
+                    }
+                ]
+            }
+
+        };
+        return report;
+    };
+    //save nfdetails to the database using jquery call.
+    $("#nfsite-info-save").click(function (evt) {
+        evt.preventDefault();
+        if (validateSiteInformation()) {
+            var jsonObject = buildJsonObject();
+            //sending the data to /
+            var token = $("meta[name='_csrf']").attr("content");
+            $.ajax({
+                type: 'post',
+                contentType: 'application/json',
+                url: contextPath + '/eforms/save',
+                data: JSON.stringify(jsonObject),
+                dataType: 'json',
+                headers : {
+                    'X-CSRF-TOKEN' : token
+                },
+                success: function(){
+                    alert("success");
+                    $(location).attr('href', contextPath + '/')
+                },
+                error: function(){
+                    alert("error");
+                }
+            });
+        }
     });
 })();
 var map,
@@ -136,7 +252,7 @@ require([
     });
     locator = new Locator("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
 
-    dojo.connect(dojo.byId("siteLocate"), "onclick", locate);
+    dojo.connect(dojo.byId("site-locate"), "onclick", locate);
 
     openStreetMapLayer = new OpenStreetMapLayer();
     map.addLayer(openStreetMapLayer);
@@ -154,15 +270,15 @@ require([
         //display mouse coordinates
         dom.byId("x-info").innerHTML = mp.x.toFixed(3);
         dom.byId("y-info").innerHTML = mp.y.toFixed(3);
-        dom.byId("siteLongitude").value = mp.x.toFixed(3);
-        dom.byId("siteLatitude").value = mp.y.toFixed(3);
+        dom.byId("site-longitude").value = mp.x.toFixed(3);
+        dom.byId("site-latitude").value = mp.y.toFixed(3);
     }
 
     function locate() {
-        var addr = dom.byId("siteAddress").value;
-        var city = dom.byId("siteCity").value;
-        var zipcode = dom.byId("siteZipcode").value;
-        var state = dom.byId("siteState").value;
+        var addr = dom.byId("site-address").value;
+        var city = dom.byId("site-city").value;
+        var zipcode = dom.byId("site-zipcode").value;
+        var state = dom.byId("site-state").value;
         var completeAddress = addr + " " + city + " " + zipcode + " " + state;
         var address = {
             SingleLine: completeAddress
@@ -224,13 +340,13 @@ require([
     locator.on("location-to-address-complete", function (evt) {
         if (evt.address.address) {
             var address = evt.address.address;
-            dom.byId("siteAddress").value = address.Address;
-            dom.byId("siteCity").value = address.City;
-            if (siteState === "Wisconsin") {
-                dom.byId("siteState").value = "WI";
+            dom.byId("site-address").value = address.Address;
+            dom.byId("site-city").value = address.City;
+            if (address.Region === "Wisconsin") {
+                dom.byId("site-state").value = "WI";
             }
-            dom.byId("siteCounty").value = address.Subregion;
-            dom.byId("siteZipcode").value = address.Postal;
+            dom.byId("site-county").value = address.Subregion;
+            dom.byId("site-zipcode").value = address.Postal;
         }
     });
 

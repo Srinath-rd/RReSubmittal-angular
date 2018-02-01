@@ -6,6 +6,7 @@ import com.dnr.brrts.web.model.FacilityRO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
@@ -33,6 +34,7 @@ public class FacActivityDetailRepository {
             "inner join X86054.dw_county c on f.COUNTY_CODE = c.COUNTY_CODE " +
             "WHERE f.fac_name LIKE ? AND f.loc_state = ? and rownum < 20 ORDER BY d.activity_detail_no ASC ";
     @Autowired
+    @Qualifier("primaryJdbcTemplate")
     JdbcTemplate jdbcTemplate;
 
     public List<FacilityRO> getFacilitiesByName(String name) {

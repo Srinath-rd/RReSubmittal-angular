@@ -1,32 +1,73 @@
 package com.dnr.brrts.web.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "SW_RRESUBM_ADDRESS")
-public class NfAddress {
+public class NfAddress extends Auditable{
     @Id
-    @GeneratedValue
+    //@GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nfaddressid_generator")
+    @SequenceGenerator(name = "nfaddressid_generator", sequenceName = "sw_rresubm_addressid_seq", allocationSize = 1)
     private Long addressId;
+
     private String address1;
     private String address2;
     private String city;
     private String county;
     private String municipality;
+    @Column(name = "wtm_x")
     private Double wtmX;
+
+    @Column(name = "wtm_y")
     private Double wtmY;
+
+    @Column(name = "LAT_X")
     private Double latitude;
+
+    @Column(name ="LONG_Y")
     private Double longitude;
     private Long zipcode;
     private String state;
     private Long phoneNumber;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
+  //  private LocalDateTime createdDate;
+  //  private LocalDateTime updatedDate;
 
-   @ManyToMany(mappedBy = "addresses")
-   private List<NfPerson> personList;
+    public NfAddress() {
+    }
+
+    @ManyToMany(mappedBy = "addresses")
+    @JsonIgnore
+   private Set<NfPerson> personList;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "FACILITY_ID")
+   @JsonIgnore
+   private NfFacility facility;
+
+    public NfAddress(String address1, String address2, String city, String county, String municipality, Double wtmX, Double wtmY, Double latitude, Double longitude, Long zipcode, String state, Long phoneNumber, Set<NfPerson> personList, NfFacility facility) {
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = city;
+        this.county = county;
+        this.municipality = municipality;
+        this.wtmX = wtmX;
+        this.wtmY = wtmY;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.zipcode = zipcode;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
+        this.personList = personList;
+        this.facility = facility;
+    }
 
     public Long getAddressId() {
         return addressId;
@@ -132,27 +173,33 @@ public class NfAddress {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public List<NfPerson> getPersonList() {
+    public Set<NfPerson> getPersonList() {
         return personList;
     }
 
-    public void setPersonList(List<NfPerson> personList) {
+    public void setPersonList(Set<NfPerson> personList) {
         this.personList = personList;
+    }
+
+    public NfFacility getFacility() {
+        return facility;
+    }
+
+    public void setFacility(NfFacility facility) {
+        this.facility = facility;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NfAddress)) return false;
+        NfAddress address = (NfAddress) o;
+        return Objects.equals(addressId, address.addressId);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(addressId);
     }
 }

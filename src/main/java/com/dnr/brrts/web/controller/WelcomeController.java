@@ -1,8 +1,16 @@
 package com.dnr.brrts.web.controller;
 
+import com.dnr.brrts.web.Utility.UserLoginUtility;
+import com.dnr.brrts.web.model.FormName;
+import com.dnr.brrts.web.model.FormStatus;
+import com.dnr.brrts.web.model.NfUser;
+import com.dnr.brrts.web.service.NfReportService;
+import com.dnr.brrts.web.service.NfUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,23 +21,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WelcomeController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+
+    @Autowired
+    private UserLoginUtility userLoginUtility;
+
+    @Autowired
+    private NfReportService reportService;
+
+    @Autowired
+    private NfUserService userService;
+
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String showWelcomePage(ModelMap model) {
-        model.put("name", getLoggedinUserName());
-        return "welcome";
+        logger.info("*************Inside showWelcomePage method***************");
+        String username = userLoginUtility.getLoggedinUserName();
+        logger.debug("User name is" + " " +  username);
+        NfUser user = userService.findUserByEmail(username);
+        model.put("allReports", reportService.findReportsByUserName(user.getEmail()));
+        model.put("pendingReports", reportService.findReportsByUserNameAndStatus(user.getEmail(), FormStatus.PENDING));
+        model.put("completedReports", reportService.findReportsByUserNameAndStatus(user.getEmail(), FormStatus.COMPLETED));
+        model.addAttribute("name", user.getFirstName());
+        model.addAttribute("useremail" , username);
+        return "home";
     }
 
-    private String getLoggedinUserName() {
-        logger.info("..............Inside getLoggedInUserName method..................");
 
-        Object principal = SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            return ((UserDetails) principal).getUsername();
-        }
-
-        return principal.toString();
-    }
 
 }

@@ -4,6 +4,7 @@ import com.dnr.brrts.web.model.ImpactRO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,9 @@ import java.util.List;
 public class ImpactDetailRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(ImpactDetailRepository.class);
+
     @Autowired
+    @Qualifier("primaryJdbcTemplate")
     JdbcTemplate jdbcTemplate;
 
     private final String query = "select impact_code, impact_desc, applicable_risk_code from "

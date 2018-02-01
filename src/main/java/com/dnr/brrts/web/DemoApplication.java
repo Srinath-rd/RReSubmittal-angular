@@ -8,9 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.WebApplicationInitializer;
+
+import javax.sql.DataSource;
 
 
 @SpringBootApplication
@@ -58,5 +65,6 @@ public class DemoApplication extends SpringBootServletInitializer implements Web
 ////            Facility returnedFacility = facilityService.saveFacility(facility);
 ////            logger.info(returnedFacility.getFacilityName());
 //	    }
+
 
 }

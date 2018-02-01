@@ -366,11 +366,11 @@
                                         </select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <button type="button" class="btn btn-info btn-md"
+                                        <button type="button" class="btn-info btn btn-xs"
                                                 id="hazardPlusButton">
                                             <span class="glyphicon glyphicon-plus-sign"></span>
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-md"
+                                        <button type="button" class="btn btn-xs btn-danger"
                                                 style="display: none;" id="hazardMinusButton">
                                             <span class="glyphicon glyphicon-minus-sign"></span>
                                         </button>
@@ -414,8 +414,8 @@
 
                             <div id="errorDiv">
 
-									<span style="display: none" class="errorMessage"
-                                          id="errorMessage"></span>
+									<span style="display: none" class="error-message"
+                                          id="error-message"></span>
                             </div>
 
                             <br> <label>Impacts to the environment</label> <span
@@ -432,11 +432,11 @@
                                     </select>
                                 </div>
                                 <div class="col-xs-2">
-                                    <button type="button" class="btn btn-info btn-md"
+                                    <button type="button" class="btn-info btn btn-xs"
                                             id="envImpactPlusButton">
                                         <span class="glyphicon glyphicon-plus-sign"></span>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-md"
+                                    <button type="button" class="btn btn-xs btn-danger"
                                             style="display: none;" id="envImpactMinusButton">
                                         <span class="glyphicon glyphicon-minus-sign"></span>
                                     </button>

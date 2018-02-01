@@ -2,18 +2,60 @@ package com.dnr.brrts.web.controller;
 
 import javax.validation.Valid;
 
+import com.dnr.brrts.web.Utility.UserLoginUtility;
+import com.dnr.brrts.web.model.FormStatus;
+import com.dnr.brrts.web.model.NfReport;
+import com.dnr.brrts.web.model.NfUser;
+import com.dnr.brrts.web.service.NfReportService;
+import com.dnr.brrts.web.service.NfUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import com.dnr.brrts.web.model.NotificationForm;
 
 @Controller
 public class NotificationFormController {
+
+    @Autowired
+    NfReportService reportService;
+
+    @Autowired
+    UserLoginUtility userLoginUtility;
+
+    @Autowired
+    NfUserService userService;
+
+    @RequestMapping(value = "/nform", method = RequestMethod.GET)
+    public String getNotificationForm(ModelMap model , @RequestParam(name = "reportId" , required = false) String reportId ) {
+        logger.info("..............Inside showTodosAlt3 method..................");
+        String name = userLoginUtility.getLoggedinUserName();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        NfUser user = userService.findUserByEmail(auth.getName());
+        if ((auth instanceof AnonymousAuthenticationToken)) {
+            return "forward:/login";
+        }else {
+          //  model.put("report", report);
+            model.put("user", user);
+            if(reportId != null){
+                NfReport reportFound = reportService.findReportByReportId(Long.valueOf(reportId));
+                model.put("report", reportFound);
+                if(reportFound.getStatus().equals(FormStatus.SUBMITTED)){
+                    return "nformpagereadonly";
+                }
+            }
+            return "nformpage";
+        }
+
+    }
+
 
 
     /**
@@ -67,7 +109,7 @@ public class NotificationFormController {
         // parameters. See the documentation for @RequestMapping
         // to get the full picture.
         logger.debug("Inside ProcessFirstStep5");
-        return "list-todosa4";
+        return "nfimpactsinfo";
     }
 
     @RequestMapping(value = "/wizardform5", method = RequestMethod.POST)

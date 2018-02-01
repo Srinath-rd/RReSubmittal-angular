@@ -1,31 +1,37 @@
 package com.dnr.brrts.web.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "SW_RRESUBM_PERSON")
-public class NfPerson {
+public class NfPerson  extends Auditable{
     @Id
-    @GeneratedValue
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nfpersonid_generator")
+    @SequenceGenerator(name = "nfpersonid_generator", sequenceName = "sw_rresubm_personid_seq", allocationSize = 1)
     private Long personId;
     private String companyName;
     private String firstName;
     private String lastName;
     private String email;
     private Long phoneNumber;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
+    //private LocalDateTime createdDate;
+    //private LocalDateTime updatedDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reported_by")
-    private NfReport report;
+    @JsonIgnore
+    @OneToMany(mappedBy = "person")
+    private Set<NfReportPerson> reportPersons = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name="SW_PERSON_ADDRESS_LNK", joinColumns = {@JoinColumn(name="PERSON_ID")},
+    @JoinTable(name="SW_RRESUBM_PER_ADDR_LNK", joinColumns = {@JoinColumn(name="PERSON_ID")},
                                          inverseJoinColumns = {@JoinColumn(name = "ADDRESS_ID")})
-    private List<NfAddress> addresses;
+    private Set<NfAddress> addresses;
 
     public NfPerson() {
         super();
@@ -79,35 +85,42 @@ public class NfPerson {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+
+//    public Set<NfReportPerson> getReportPersons() {
+//        return reportPersons;
+//    }
+//
+//    public void setReportPersons(Set<NfReportPerson> reportPersons) {
+//        this.reportPersons = reportPersons;
+//    }
+
+    public Set<NfReportPerson> getReportPersons() {
+        return reportPersons;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
+    public void setReportPersons(Set<NfReportPerson> reportPersons) {
+        this.reportPersons = reportPersons;
     }
 
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(LocalDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public NfReport getReport() {
-        return report;
-    }
-
-    public void setReport(NfReport report) {
-        this.report = report;
-    }
-
-    public List<NfAddress> getAddresses() {
+    public Set<NfAddress> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<NfAddress> addresses) {
+    public void setAddresses(Set<NfAddress> addresses) {
         this.addresses = addresses;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NfPerson)) return false;
+        NfPerson nfPerson = (NfPerson) o;
+        return Objects.equals(personId, nfPerson.personId);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(personId);
     }
 }

@@ -25,6 +25,6 @@ public class LogoutController {
                     authentication);
         }
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
