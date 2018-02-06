@@ -11,7 +11,7 @@
         <%@ include file="common/headera.jspf" %>
         <%--<%@ include file="common/navigationa.jspf" %>--%>
         <div>
-            <div>  <button class="pull-left btn btn-xs btn-primary"   onclick="window.location='/rresubmittal/';">Back</button></div>
+            <div>  <button class="pull-left btn btn-xs btn-primary"   onclick="window.location='/rresubmittal/api/';">Back</button></div>
             <div><button class="btn-xs btn btn-primary hidden-print pull-right" onclick="printpage()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</button></div>
         </div>
         <h6 class="important" style="text-align: center">*Emergency Discharges / Spills should be

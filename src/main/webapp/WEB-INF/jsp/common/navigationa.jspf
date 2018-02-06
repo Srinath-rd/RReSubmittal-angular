@@ -2,11 +2,11 @@
 
     <div class="navbar-collapse">
         <ul class="nav navbar-nav">
-            <li><a href="/rresubmittal/">Home</a></li>
+            <li><a href="/rresubmittal/api/">Home</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/rresubmittal/logout">Logout</a></li>
+            <li><a href="/rresubmittal/api/logout">Logout</a></li>
         </ul>
     </div>
 </nav>
