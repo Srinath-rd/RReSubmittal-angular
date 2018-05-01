@@ -3,20 +3,27 @@ package com.dnr.brrts.web;
 
 import com.dnr.brrts.web.repository.FacActivityDetailRepository;
 import com.dnr.brrts.web.service.FacilityServiceImpl;
+import org.apache.catalina.Context;
+import org.apache.catalina.startup.Tomcat;
+import org.apache.tomcat.util.descriptor.web.ContextResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.web.WebApplicationInitializer;
 
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
@@ -65,6 +72,9 @@ public class DemoApplication extends SpringBootServletInitializer implements Web
 ////            Facility returnedFacility = facilityService.saveFacility(facility);
 ////            logger.info(returnedFacility.getFacilityName());
 //	    }
+
+
+
 
 
 }
